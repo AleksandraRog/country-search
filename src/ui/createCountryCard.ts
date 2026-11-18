@@ -10,7 +10,7 @@ export function createCountryCart(country: CountryCart): View {
     },
   })([
     createView('div.card-flag-wrapper')([
-      createView('img', {
+      createView('img.card-flag', {
         attrs: {
           src: country.flag,
           alt: `Flag of ${country.name}`,
