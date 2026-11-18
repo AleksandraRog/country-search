@@ -1,9 +1,11 @@
 import {CountryDto} from '../data/Entities';
 import {HttpError} from '../data/HttpError';
+import storage from '../data/storage';
 import {CountryCart} from './Country';
 import {debounce} from './debounce';
 import {FullCart} from './FullCartCountry';
 import {mapCountryResponse} from './mapCountryResponse';
+import {mapFullCartResponse} from './mapFullCartResponse';
 import {searchCountries} from './searchCountries';
 
 export type SearchHistoryCache = Record<string, FullCart[]>;
@@ -66,19 +68,8 @@ export class SearchController {
         if (data.length === 0) {
           this.onEmpty(query);
         } else {
-          this.history[query] = data.map(
-            (dto: CountryDto) =>
-              new FullCart(
-                dto.name,
-                dto.flags.svg || dto.flags.png || '',
-                dto.capital || '—',
-                dto.region,
-                dto.population,
-                dto.nativeName,
-                dto.subregion,
-                dto.languages?.map(({name}) => name) ?? [],
-              ),
-          );
+          this.history[query] = mapFullCartResponse(data);
+          storage.setItem<FullCart[]>('carts', this.history[query]);
           this.onResults(mapCountryResponse(data));
         }
       })
