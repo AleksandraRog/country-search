@@ -47,8 +47,11 @@ const filterSelect = createView('select.filter-select')(
 const searchHeader = createView('header.search-header')([searchBox, filterSelect]);
 
 const countriesGrid = renderView<HTMLElement>(createView('main.countries-grid'));
+const historyContainer = renderView<HTMLDivElement>(createView('div.history-bar'));
 
-const container = renderView<HTMLDivElement>(createView('div.container')([searchHeader, countriesGrid]));
+const container = renderView<HTMLDivElement>(
+  createView('div.container')([searchHeader, historyContainer, countriesGrid]),
+);
 
 const body = document.querySelector<HTMLBodyElement>('body');
 body?.replaceChildren(container);
@@ -89,6 +92,10 @@ searchController.onNetworkError = () => {
   showErrorMessage();
 };
 
+searchController.onHistoryChange = (queries) => {
+  renderHistoryTags(queries);
+};
+
 function toggleSpinner(isLoading: boolean) {
   searchBox.classList.toggle('is-loading', isLoading);
 }
@@ -111,6 +118,36 @@ function showErrorMessage(error: Error | DOMException = new Error('Ошибка!
     createView('.error-placeholder')([createView('.error-message', {text: `${error.message}`}), reloadButton]),
   );
   countriesGrid.replaceChildren(errorPlaceholder);
+}
+
+function renderHistoryTags(queries: string[]) {
+  if (queries.length === 0) {
+    historyContainer.replaceChildren();
+    return;
+  }
+
+  const label = renderView<HTMLSpanElement>(
+    createView('span.spec-label', {
+      text: 'Последние запросы:',
+    }),
+  );
+
+  const tags = queries.map((query) =>
+    renderView<HTMLButtonElement>(
+      createView('button.tag-pill', {
+        text: query,
+        attrs: {type: 'button'},
+        events: {
+          click: () => {
+            searchInput.value = query;
+            searchController.onEditText(query);
+          },
+        },
+      }),
+    ),
+  );
+
+  historyContainer.replaceChildren(label, ...tags);
 }
 
 function renderCards(countries: CountryCart[]) {

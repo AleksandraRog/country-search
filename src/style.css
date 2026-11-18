@@ -170,6 +170,64 @@ body {
   box-shadow: 0 0 0 3px rgba(22, 128, 61, 0.16);
 }
 
+.search-header {
+  margin-bottom: 16px; /* уменьшаем отступ, чтобы история была ближе к поиску */
+}
+
+.history-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.history-bar:empty {
+  display: none; /* полностью скрываем блок, если история пуста */
+}
+
+.history-label {
+  font-size: 13px;
+  color: var(--font-muted);
+  margin-right: 4px;
+}
+
+.history-bar .tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  background: #d5eee1;
+  border: 1px solid #b4dec8;
+  border-radius: 999px;
+  color: var(--font-heading);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.history-bar .tag-pill:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--font-on-dark);
+}
+
+.history-bar .tag-pill:active {
+  transform: scale(0.97);
+}
+
+.history-bar .tag-pill:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(22, 121, 72, 0.16);
+}
+
 /* --- СЕТКА КАРТОЧЕК --- */
 .countries-grid {
   display: grid;

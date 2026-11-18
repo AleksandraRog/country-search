@@ -24,6 +24,8 @@ export class SearchController {
   public onHttpError: (error: HttpError) => void = () => {};
   public onNetworkError: (error: Error) => void = () => {};
 
+  public onHistoryChange: (queries: string[]) => void = () => {};
+
   private controller: AbortController | null = null;
   private lastCompletedQuery = '';
   private readonly debouncedFetch: ((query: string) => void) & {cancel: () => void};
@@ -32,6 +34,16 @@ export class SearchController {
     delay = 400,
     private readonly timeout = 5000,
   ) {
+    storage
+      .getItem('history')
+      .then((data: SearchHistoryCache | null) => {
+        if (data && typeof data === 'object') {
+          this.history = data;
+          this.onHistoryChange(Object.keys(this.history).reverse());
+        }
+      })
+      .catch(() => {});
+
     this.debouncedFetch = debounce((query: string) => {
       void this.executeSearch(query);
     }, delay);
@@ -137,6 +149,7 @@ export class SearchController {
     }
 
     storage.setItem<SearchHistoryCache>('history', this.history);
+    this.onHistoryChange(Object.keys(this.history).reverse());
   }
 
   cancel(): void {
