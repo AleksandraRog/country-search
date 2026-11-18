@@ -9,6 +9,7 @@ import {mapFullCartResponse} from './mapFullCartResponse';
 import {searchCountries} from './searchCountries';
 
 export type SearchHistoryCache = Record<string, FullCart[]>;
+const MAX_HISTORY_ITEMS = 10;
 
 export class SearchController {
   public onIdle: () => void = () => {};
@@ -50,6 +51,29 @@ export class SearchController {
       return;
     }
 
+    const cachedFullCarts = this.history[query];
+    if (cachedFullCarts) {
+      this.lastCompletedQuery = query;
+      this.saveToHistory(query, cachedFullCarts);
+      storage.setItem<FullCart[]>('carts', cachedFullCarts);
+
+      const cards = cachedFullCarts.map(
+        (item) =>
+          new CountryCart(
+            item.name,
+            item.flag,
+            item.capital,
+            item.region,
+            item.population,
+            item.nativeName,
+            item.subregion,
+            item.languages,
+          ),
+      );
+      this.onResults(cards);
+      return;
+    }
+
     this.debouncedFetch(query);
   };
 
@@ -68,7 +92,8 @@ export class SearchController {
         if (data.length === 0) {
           this.onEmpty(query);
         } else {
-          this.history[query] = mapFullCartResponse(data);
+          const carts = mapFullCartResponse(data);
+          this.saveToHistory(query, carts);
           storage.setItem<FullCart[]>('carts', this.history[query]);
           this.onResults(mapCountryResponse(data));
         }
@@ -100,6 +125,19 @@ export class SearchController {
 
   getHistory() {
     return this.history;
+  }
+
+  private saveToHistory(cacheKey: string, items: FullCart[]): void {
+    delete this.history[cacheKey];
+    this.history[cacheKey] = items;
+
+    const keys = Object.keys(this.history);
+    if (keys.length > MAX_HISTORY_ITEMS) {
+      const oldestKey = keys[0];
+      delete this.history[oldestKey];
+    }
+
+    storage.setItem<SearchHistoryCache>('history', this.history);
   }
 
   cancel(): void {
