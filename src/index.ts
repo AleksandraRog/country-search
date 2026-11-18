@@ -77,6 +77,18 @@ searchController.onError = () => {
   showErrorMessage();
 };
 
+searchController.onTimeoutError = () => {
+  showErrorMessage();
+};
+
+searchController.onHttpError = (error) => {
+  showErrorMessage(error);
+};
+
+searchController.onNetworkError = () => {
+  showErrorMessage();
+};
+
 function toggleSpinner(isLoading: boolean) {
   searchBox.classList.toggle('is-loading', isLoading);
 }
@@ -88,7 +100,7 @@ function showEmptyContainer() {
   countriesGrid.replaceChildren(emptyPlaceholder);
 }
 
-function showErrorMessage() {
+function showErrorMessage(error: Error | DOMException = new Error('Ошибка! Попробуйте позднее')) {
   const reloadButton = renderView<HTMLButtonElement>(
     createView('button.replace-button', {
       text: 'Обновить',
@@ -96,7 +108,7 @@ function showErrorMessage() {
     }),
   );
   const errorPlaceholder = renderView<HTMLDivElement>(
-    createView('.error-placeholder')([createView('.error-message', {text: 'Ошибка сети'}), reloadButton]),
+    createView('.error-placeholder')([createView('.error-message', {text: `${error.message}`}), reloadButton]),
   );
   countriesGrid.replaceChildren(errorPlaceholder);
 }
