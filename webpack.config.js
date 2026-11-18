@@ -11,7 +11,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const baseConfig = {
-  entry: path.resolve(__dirname, './src/index.ts'),
+  entry: {
+    index: path.resolve(__dirname, './src/index.ts'),
+    cart: path.resolve(__dirname, './src/ui/cart/cart.ts'),
+  },
   mode: 'development',
   module: {
     rules: [
@@ -41,13 +44,19 @@ const baseConfig = {
     extensions: ['.ts', '.js'],
   },
   output: {
-    filename: 'index.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, './dist'),
+    clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
       filename: 'index.html',
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/ui/cart/cart.html'),
+      filename: 'cart.html',
+      chunks: ['cart'],
     }),
     new CleanWebpackPlugin(),
   ],
