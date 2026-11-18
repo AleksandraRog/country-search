@@ -6,7 +6,7 @@ import {View} from './view';
 export function createCountryCart(country: CountryCart): View {
   return createView('a.country-card', {
     attrs: {
-      href: 'cart.html',
+      href: `cart.html?name=${encodeURIComponent(country.name)}`,
     },
   })([
     createView('div.card-flag-wrapper')([
