@@ -43,8 +43,7 @@ export class SearchController {
 
     if (!query) {
       this.lastCompletedQuery = '';
-      const history = this.getHistory();
-      this.onEmptyRequest(history);
+      this.onIdle();
       return;
     }
     if (query === this.lastCompletedQuery) {
