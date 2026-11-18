@@ -9,7 +9,7 @@ export function mapFullCartResponse(data: CountryDto[]): FullCart[] {
         raw.flags.svg || raw.flags.png || '',
         raw.capital || '—',
         raw.region || '—',
-        raw.population ?? '—',
+        raw.population ?? 0,
         raw.nativeName,
         raw.subregion || '—',
         raw.languages?.map(({name}) => name) ?? [],

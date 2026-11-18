@@ -42,7 +42,7 @@ export function createCountryDetailView(data: FullCart): View {
   ]);
 
   const kpiItems = [
-    {label: 'Население', value: data.population},
+    {label: 'Население', value: data.population.toLocaleString('ru-RU')},
     {label: 'Площадь', value: data.area},
     {label: 'Плотность', value: data.density},
   ];
@@ -56,7 +56,7 @@ export function createCountryDetailView(data: FullCart): View {
   const specItems = [
     {label: 'Столица (Capital)', value: data.capital},
     {label: 'Демоним (Demonym)', value: data.demonym},
-    {label: 'Языки (Languages)', value: data.languages},
+    {label: 'Языки (Languages)', value: data.languages.join(', ') || '—'},
     {label: 'Валюта (Currencies)', value: data.currencies},
     {label: 'Коды ISO / Цифровой', value: data.isoCodes},
     {label: 'Домен и телефонный код', value: data.domainAndPhone},
