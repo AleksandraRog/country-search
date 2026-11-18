@@ -1,0 +1,644 @@
+:root {
+  /* Фоны: пастельный салат + пастельная мята */
+  --bg-page: #f2faf6;
+  --bg-card: #ffffff;
+  --bg-mint-soft: #e6f6ee;
+  --bg-salad-soft: #eef9e6;
+
+  /* Гармоничная палитра шрифтов */
+  --font-heading: #102a1d; /* Глубокий лесной — для заголовков и главных цифр */
+  --font-body: #234232; /* Тёмный эвкалипт — для значений и основного текста */
+  --font-muted: #4c705e; /* Приглушённый шалфей — для лейблов и подписей */
+  --font-placeholder: #84a695; /* Светлая полынь — для подсказок в инпутах */
+  --font-accent: #167948; /* Изумрудный — для регионов, тегов и акцентов */
+  --font-on-dark: #ecfdf5; /* Мятно-белый — для текста на тёмных бейджах */
+
+  /* Обводки и тени */
+  --border-color: #cde8d9;
+  --accent: #167948;
+  --shadow-sm: 0 2px 6px rgba(16, 42, 29, 0.05);
+  --shadow-md: 0 12px 24px -6px rgba(16, 42, 29, 0.12);
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  display: block;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--font-body);
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- ПРИМЕНЕНИЕ ЦВЕТОВ ШРИФТОВ --- */
+
+/* Заголовки и ключевые показатели */
+.card-title,
+.detail-title,
+.stat-value {
+  color: var(--font-heading);
+  letter-spacing: -0.015em;
+}
+
+/* Основной текст и значения характеристик */
+.search-input,
+.region-select,
+.card-meta strong,
+.spec-value,
+.back-btn,
+.btn-outline,
+.border-tag {
+  color: var(--font-body);
+}
+
+/* Второстепенные подписи и лейблы */
+.search-icon,
+.card-native,
+.card-meta span,
+.detail-subtitle,
+.stat-label,
+.spec-label {
+  color: var(--font-muted);
+}
+
+.detail-subtitle strong {
+  color: var(--font-body);
+  font-weight: 600;
+}
+
+/* Плейсхолдер в поиске */
+.search-input::placeholder {
+  color: var(--font-placeholder);
+}
+
+/* Акцентные текстовые элементы */
+.card-region,
+.badge,
+.btn-outline:hover,
+.border-tag:hover {
+  color: var(--font-accent);
+}
+
+/* Бейдж кода поверх флага */
+.card-code-badge {
+  background: rgba(16, 42, 29, 0.82);
+  color: var(--font-on-dark);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+/* --- ПАНЕЛЬ ПОИСКА --- */
+.search-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 280px;
+  max-width: 480px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.search-input,
+.region-select {
+  width: 100%;
+  height: 48px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  color: var(--text-main);
+  box-shadow: var(--shadow-sm);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.search-input::placeholder {
+  color: #82a392;
+}
+
+.search-input {
+  padding: 0 16px 0 42px;
+}
+
+.region-select {
+  width: 200px;
+  padding: 0 16px;
+  cursor: pointer;
+}
+
+.search-input:focus,
+.region-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(22, 128, 61, 0.16);
+}
+
+/* --- СЕТКА КАРТОЧЕК --- */
+.countries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 24px;
+}
+
+.country-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.country-card:hover {
+  transform: translateY(-4px);
+  border-color: #9ed4b8;
+  box-shadow: var(--shadow-md);
+}
+
+.card-flag-wrapper {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--bg-mint-soft);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.card-flag {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-code-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(19, 42, 30, 0.78);
+  backdrop-filter: blur(4px);
+  color: #ecfdf5;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.card-native {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.card-region {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 2px;
+  margin-bottom: 14px;
+}
+
+.card-meta {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 12px;
+}
+
+.card-meta li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-meta span {
+  color: var(--text-muted);
+}
+
+/* --- ПОЛНАЯ КАРТОЧКА СТРАНЫ --- */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 32px;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.back-btn:hover {
+  background: var(--bg-salad-soft);
+  border-color: #9ed4b8;
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 48px;
+  align-items: start;
+  background: var(--bg-card);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.detail-flag {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+}
+
+.map-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn-outline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--bg-mint-soft);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text-main);
+  font-size: 14px;
+  font-weight: 600;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+.btn-outline:hover {
+  background: var(--bg-salad-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.detail-title {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.detail-subtitle {
+  color: var(--text-muted);
+  font-size: 15px;
+  margin-top: 4px;
+}
+
+.codes-group {
+  display: flex;
+  gap: 8px;
+}
+
+.badge {
+  background: var(--bg-salad-soft);
+  border: 1px solid #c5e8b7;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* Метрики (Население, Площадь, Плотность) */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.stat-box {
+  background: linear-gradient(135deg, var(--bg-mint-soft) 0%, var(--bg-salad-soft) 100%);
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.stat-label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Таблица характеристик */
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.spec-value {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Граничащие страны */
+.borders-section {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.borders-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.border-tag {
+  background: var(--bg-mint-soft);
+  border: 1px solid var(--border-color);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.border-tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--bg-salad-soft);
+}
+
+/* Адаптив под мобильные экраны */
+@media (max-width: 860px) {
+  .detail-layout {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 20px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- СПИННЕР ВНУТРИ ПОИСКОВОЙ СТРОКИ --- */
+.search-spinner {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid var(--border-color);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: none; /* Скрыт по умолчанию */
+}
+
+.search-box.is-loading .search-spinner {
+  display: block;
+}
+
+@keyframes spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+/* --- СКЕЛЕТОНЫ КАРТОЧЕК (Пастельная мята + салат) --- */
+.skeleton-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, var(--bg-mint-soft) 25%, var(--bg-salad-soft) 50%, var(--bg-mint-soft) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: 6px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-flag {
+  aspect-ratio: 16 / 10;
+  border-radius: 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.skeleton-body {
+  padding: 20px;
+}
+
+.skeleton-title {
+  height: 22px;
+  width: 65%;
+  margin-bottom: 10px;
+}
+
+.skeleton-region {
+  height: 14px;
+  width: 45%;
+  margin-bottom: 18px;
+}
+
+.skeleton-line {
+  height: 14px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.skeleton-line:last-child {
+  width: 80%;
+  margin-bottom: 0;
+}
+
+/* --- СОСТОЯНИЕ «НИЧЕГО НЕ НАЙДЕНО» --- */
+.empty-state {
+  grid-column: 1 / -1; /* Растягиваем на всю ширину сетки карточек */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 56px 24px;
+  background: var(--bg-card);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.empty-icon-wrap {
+  width: 68px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  background: linear-gradient(135deg, var(--bg-mint-soft) 0%, var(--bg-salad-soft) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.empty-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--font-heading);
+  margin-bottom: 8px;
+}
+
+.empty-text {
+  font-size: 15px;
+  color: var(--font-muted);
+  max-width: 420px;
+  margin-bottom: 24px;
+}
+
+.empty-query {
+  color: var(--font-accent);
+  font-weight: 600;
+}
+
+.btn-reset {
+  padding: 10px 20px;
+  background: var(--bg-mint-soft);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--font-accent);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.15s;
+}
+
+.btn-reset:hover {
+  background: var(--bg-salad-soft);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
