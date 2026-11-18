@@ -470,6 +470,10 @@ body {
   background: var(--bg-salad-soft);
 }
 
+.tag-pill {
+  margin: 0 0.5rem;
+}
+
 /* Адаптив под мобильные экраны */
 @media (max-width: 860px) {
   .detail-layout {
