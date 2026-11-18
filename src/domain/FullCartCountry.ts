@@ -1,0 +1,25 @@
+export class FullCart {
+  constructor(
+    public readonly name: string,
+    public readonly flag: string,
+    public readonly capital: string,
+    public readonly region: string,
+    public readonly population: number,
+    public readonly nativeName: string,
+    public readonly subregion: string,
+    public readonly languages: string[],
+    public readonly flagEmoji: string,
+    public readonly flagUrl: string,
+    public readonly area: string,
+    public readonly density: string,
+    public readonly demonym: string,
+    public readonly currencies: string,
+    public readonly isoCodes: string,
+    public readonly domainAndPhone: string,
+    public readonly coordinates: string,
+    public readonly timezones: string,
+    public readonly borders: string[],
+    public readonly googleMapsUrl: string,
+    public readonly openStreetMapUrl: string,
+  ) {}
+}

@@ -1,0 +1,141 @@
+[
+  {
+    "name": "Israel",
+    "topLevelDomain": [".il"],
+    "alpha2Code": "IL",
+    "alpha3Code": "ISR",
+    "callingCodes": ["972"],
+    "capital": "Jerusalem",
+    "altSpellings": ["IL", "State of Israel", "Medīnat Yisrā'el"],
+    "subregion": "Western Asia",
+    "region": "Asia",
+    "population": 9216900,
+    "latlng": [31.5, 34.75],
+    "demonym": "Israeli",
+    "area": 20770,
+    "timezones": ["UTC+02:00", "UTC+03:00"],
+    "borders": ["EGY", "JOR", "LBN", "SYR"],
+    "nativeName": "ישראל",
+    "numericCode": "376",
+    "flags": {
+      "svg": "https://countries.dev/flags/il.svg",
+      "png": "https://countries.dev/flags/il.png"
+    },
+    "currencies": [
+      {
+        "code": "ILS",
+        "name": "Israeli new shekel",
+        "symbol": "₪"
+      }
+    ],
+    "languages": [
+      {
+        "iso639_1": "he",
+        "iso639_2": "heb",
+        "name": "Hebrew",
+        "nativeName": "עברית"
+      },
+      {
+        "iso639_1": "ar",
+        "iso639_2": "ara",
+        "name": "Arabic",
+        "nativeName": "العربية"
+      }
+    ],
+    "flag": "🇮🇱",
+    "maps": {
+      "googleMaps": "https://goo.gl/maps/dm1TYj5VvqCdRt8WA",
+      "openStreetMaps": "https://www.openstreetmap.org/relation/1473946"
+    },
+    "populationDensity": 443.6
+  },
+  {
+    "name": "Japan",
+    "topLevelDomain": [".jp"],
+    "alpha2Code": "JP",
+    "alpha3Code": "JPN",
+    "callingCodes": ["81"],
+    "capital": "Tokyo",
+    "altSpellings": ["JP", "Nippon", "Nihon", "Nihon-koku"],
+    "subregion": "Eastern Asia",
+    "region": "Asia",
+    "population": 125836021,
+    "latlng": [36.0, 138.0],
+    "demonym": "Japanese",
+    "area": 377930,
+    "timezones": ["UTC+09:00"],
+    "borders": [],
+    "nativeName": "日本",
+    "numericCode": "392",
+    "flags": {
+      "svg": "https://countries.dev/flags/jp.svg",
+      "png": "https://countries.dev/flags/jp.png"
+    },
+    "currencies": [
+      {
+        "code": "JPY",
+        "name": "Japanese yen",
+        "symbol": "¥"
+      }
+    ],
+    "languages": [
+      {
+        "iso639_1": "ja",
+        "iso639_2": "jpn",
+        "name": "Japanese",
+        "nativeName": "日本語"
+      }
+    ],
+    "flag": "🇯🇵",
+    "maps": {
+      "googleMaps": "https://goo.gl/maps/NGTLSCSrA8bMrvnX9",
+      "openStreetMaps": "https://www.openstreetmap.org/relation/382313"
+    },
+    "populationDensity": 333.0
+  },
+
+  {
+    "name": "Brazil",
+    "topLevelDomain": [".br"],
+    "alpha2Code": "BR",
+    "alpha3Code": "BRA",
+    "callingCodes": ["55"],
+    "capital": "Brasília",
+    "altSpellings": ["BR", "Brasil", "Federative Republic of Brazil"],
+    "subregion": "South America",
+    "region": "Americas",
+    "population": 212559409,
+    "latlng": [-10.0, -55.0],
+    "demonym": "Brazilian",
+    "area": 8515767,
+    "timezones": ["UTC-05:00", "UTC-04:00", "UTC-03:00", "UTC-02:00"],
+    "borders": ["ARG", "BOL", "COL", "FRA", "GUY", "PRY", "PER", "SUR", "URY", "VEN"],
+    "nativeName": "Brasil",
+    "numericCode": "076",
+    "flags": {
+      "svg": "https://countries.dev/flags/br.svg",
+      "png": "https://countries.dev/flags/br.png"
+    },
+    "currencies": [
+      {
+        "code": "BRL",
+        "name": "Brazilian real",
+        "symbol": "R$"
+      }
+    ],
+    "languages": [
+      {
+        "iso639_1": "pt",
+        "iso639_2": "por",
+        "name": "Portuguese",
+        "nativeName": "Português"
+      }
+    ],
+    "flag": "🇧🇷",
+    "maps": {
+      "googleMaps": "https://goo.gl/maps/waCKk21HeeqFzkNC9",
+      "openStreetMaps": "https://www.openstreetmap.org/relation/59470"
+    },
+    "populationDensity": 25.0
+  }
+]
